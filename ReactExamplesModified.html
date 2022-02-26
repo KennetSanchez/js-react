@@ -21,8 +21,8 @@
                 <nav>
                      <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">HelloMessage</button>
-                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Timer</button>
-                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">TODO</button>
+                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">StatefulComponent v1</button>
+                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">StatefulComponent v2</button>
                         <button class="nav-link" id="nav-mark-tab" data-bs-toggle="tab" data-bs-target="#nav-mark" type="button" role="tab" aria-controls="nav-mark" aria-selected="false">Markdown</button>
                     </div>
                 </nav>
@@ -34,7 +34,7 @@
                             <Timer/>
                         </div>
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                            <TodoApp/>
+                            <Timer2/>
                         </div>
                         <div class="tab-pane fade" id="nav-mark" role="tabpanel" aria-labelledby="nav-mark-tab">
                             <MarkdownEditor/>
@@ -87,7 +87,48 @@
             render() {
                 return (
                 <div>
-                    Hours: {this.state.hours} Minutes: {this.state.minutes} Seconds: {this.state.seconds}
+                    {this.state.hours}:{this.state.minutes}:{this.state.seconds}
+                </div>
+                );
+            }
+        }
+        class Timer2 extends React.Component {
+            constructor(props) {
+            super(props);
+            this.state = { hours:0,minutes:0,seconds: 0};
+            }
+
+            tick() {
+                this.setState(state => ({
+                seconds: state.seconds + 1
+                }));
+                if(this.state.seconds>=10){
+                    this.setState(state => ({
+                        seconds: 0,
+                        minutes: state.minutes +1
+                    }));
+                }
+                if(this.state.minutes>=10){
+                    this.setState(state => ({
+                        seconds: 0,
+                        minutes: 0,
+                        hours: state.hours +1
+                    }));
+                }
+            }
+
+            componentDidMount() {
+                this.interval = setInterval(() => this.tick(), 1000);
+            }
+
+            componentWillUnmount() {
+                clearInterval(this.interval);
+            }
+
+            render() {
+                return (
+                <div>
+                    {this.state.hours}:{this.state.minutes}:{this.state.seconds}
                 </div>
                 );
             }
@@ -141,6 +182,7 @@
                 }));
             }
         }
+
 
         class TodoList extends React.Component {
             render() {
