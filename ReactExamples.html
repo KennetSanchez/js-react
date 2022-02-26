@@ -28,7 +28,7 @@
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <HelloMessage name= "Juan"/>
+                            <HelloMessage name= "Taylor"/>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <Timer/>
@@ -162,10 +162,11 @@
                     <label htmlFor="markdown-content">
                     Enter some markdown
                     </label>
+                    <br/>
                     <textarea
-                    id="markdown-content"
-                    onChange={this.handleChange}
-                    defaultValue={this.state.value}
+                        id="markdown-content"
+                        onChange={this.handleChange}
+                        defaultValue={this.state.value}
                     />
                     <h3>Output</h3>
                     <div
