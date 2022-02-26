@@ -23,7 +23,7 @@
                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">HelloMessage</button>
                         <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">StatefulComponent v1</button>
                         <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">StatefulComponent v2</button>
-                        <button class="nav-link" id="nav-mark-tab" data-bs-toggle="tab" data-bs-target="#nav-mark" type="button" role="tab" aria-controls="nav-mark" aria-selected="false">Markdown</button>
+                        <button class="nav-link" id="nav-mark-tab" data-bs-toggle="tab" data-bs-target="#nav-mark" type="button" role="tab" aria-controls="nav-mark" aria-selected="false">TODO APP</button>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
@@ -37,7 +37,7 @@
                             <Timer2/>
                         </div>
                         <div class="tab-pane fade" id="nav-mark" role="tabpanel" aria-labelledby="nav-mark-tab">
-                            <MarkdownEditor/>
+                            <TodoApp/>
                         </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@
         class TodoApp extends React.Component {
             constructor(props) {
                 super(props);
-                this.state = { items: [], text: '' };
+                this.state = { items: [], text: '',number:0};
                 this.handleChange = this.handleChange.bind(this);
                 this.handleSubmit = this.handleSubmit.bind(this);
             }
@@ -156,7 +156,7 @@
                         value={this.state.text}
                     />
                     <button>
-                        Add #{this.state.items.length + 1}
+                        Add #{String.fromCharCode(this.state.items.length + 65)}
                     </button>
                     </form>
                 </div>
@@ -174,11 +174,13 @@
                 }
                 const newItem = {
                 text: this.state.text,
-                id: Date.now()
+                id: Date.now(),
+                number: this.state.number
                 };
                 this.setState(state => ({
                 items: state.items.concat(newItem),
-                text: ''
+                text: '',
+                number: state.number+1
                 }));
             }
         }
@@ -189,7 +191,7 @@
                 return (
                 <ul>
                     {this.props.items.map(item => (
-                    <li key={item.id}>{item.text}</li>
+                    <li key={item.id}>{String.fromCharCode(item.number+65)}. {item.text}</li>
                     ))}
                 </ul>
                 );
