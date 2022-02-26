@@ -28,7 +28,7 @@
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <HelloMessage name= "Taylor"/>
+                            <HelloMessage name= "J. David" name2="Kennet"/>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <Timer/>
@@ -46,7 +46,7 @@
              render() {
                 return (
                  <div>
-                    Hello {this.props.name}
+                    Hola {this.props.name} y {this.props.name2}
                  </div>
                 );
             }
@@ -54,13 +54,26 @@
         class Timer extends React.Component {
             constructor(props) {
             super(props);
-            this.state = { seconds: 0 };
+            this.state = { hours:0,minutes:0,seconds: 0};
             }
 
             tick() {
                 this.setState(state => ({
                 seconds: state.seconds + 1
                 }));
+                if(this.state.seconds>=60){
+                    this.setState(state => ({
+                        seconds: 0,
+                        minutes: state.minutes +1
+                    }));
+                }
+                if(this.state.minutes>=60){
+                    this.setState(state => ({
+                        seconds: 0,
+                        minutes: 0,
+                        hours: state.hours +1
+                    }));
+                }
             }
 
             componentDidMount() {
@@ -74,7 +87,7 @@
             render() {
                 return (
                 <div>
-                    Seconds: {this.state.seconds}
+                    Hours: {this.state.hours} Minutes: {this.state.minutes} Seconds: {this.state.seconds}
                 </div>
                 );
             }
