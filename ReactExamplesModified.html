@@ -23,8 +23,9 @@
                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">HelloMessage</button>
                         <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">StatefulComponent v1</button>
                         <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">StatefulComponent v2</button>
-                        <button class="nav-link" id="nav-mark-tab" data-bs-toggle="tab" data-bs-target="#nav-mark" type="button" role="tab" aria-controls="nav-mark" aria-selected="false">TODO APP</button>
-                    </div>
+                        <button class="nav-link" id="nav.todo-tab" data-bs-toggle="tab" data-bs-target="#nav-todo" type="button" role="tab" aria-controls="nav-todo" aria-selected="false">TODO APP</button>
+                        <button class="nav-link" id="nav-mark-tab" data-bs-toggle="tab" data-bs-target="#nav-mark" type="button" role="tab" aria-controls="nav-mark" aria-selected="false">Markdown</button>
+                        </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -36,8 +37,11 @@
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                             <Timer2/>
                         </div>
-                        <div class="tab-pane fade" id="nav-mark" role="tabpanel" aria-labelledby="nav-mark-tab">
+                        <div class="tab-pane fade" id="nav-todo" role="tabpanel" aria-labelledby="nav-todo-tab">
                             <TodoApp/>
+                        </div>
+                        <div class="tab-pane fade" id="nav-mark" role="tabpanel" aria-labelledby="nav-mark-tab">
+                            <MarkdownEditor/>
                         </div>
                 </div>
             </div>
@@ -200,7 +204,9 @@
         class MarkdownEditor extends React.Component {
             constructor(props) {
                 super(props);
-                this.md = new Remarkable();
+                this.md = new Remarkable({
+                    html: true
+                });
                 this.handleChange = this.handleChange.bind(this);
                 this.state = { value: 'Hello, **world**!' };
             }
